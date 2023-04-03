@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+body {
+  /* background-color:  rgb(26, 24, 24); */
+  background-color: #b49de6;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  font-family: "Ubuntu", sans-serif;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  height: 65 px;
+  background-color: black;
+  color: white;
+}
+nav ul li {
+  padding: 0 12px;
+}
+nav .search{
+  display: flex;
+  margin-left: 180px;
+  align-items: center;
+  padding: 0;
+}
+nav .searchbar{
+  margin-left: 1%;
+}
+.searchicon{
+  margin-left: 150px;
+  cursor: pointer;
+}
+.search .searchbar input{
+  color: white;
+  width: 200%;
+  padding: 4px 0;
+  border-radius: 12px;
+  padding-left: 4px;
+  border-style: ridge;
+  border-width: -1px;
+  outline: 0;
+  background-color: transparent;
+}
+.brand img {
+  width: 42px;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  padding-left: 2px;
+  padding-right: 4px;
+  font-family: "Varela Round", sans-serif;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+.cont{
+  display: flex;
+}
+.container1 {
+  min-height: 58.7vh;
+  background-color: black;
+  color: whitesmoke;
+  font-family: "Varela Round", sans-serif;
+  display: flex;
+  width: 55%;
+  margin: 23px;
+  margin-left: 15px;
+  padding: 34px;
+  border-radius: 12px;
+  background-image: url("marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg");
+  background-size: 772px;
+}
+.container2{
+  color: white;
+  background-color: black;
+  width: 440px;
+  font-family: "Varela Round", sans-serif;
+  margin: 2px 2px;
+  border-radius: 12px;
+  padding: 34px;
+  padding-top: 11px;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+.container2 .heading{
+  padding: 2px 4px;
+  border-bottom-style: outset;
+  border-width: -2px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+.bottom {
+  position: sticky;
+  height: 75px;
+  bottom: 0;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  flex-direction: column;
+  background-blend-mode: transparent;
+}
+.icons {
+  margin-top: 14px;
+}
+.icons svg {
+  padding: 0 4px;
+  cursor: pointer;
+}
+#myProgressBar {
+  width: 60vw;
+  cursor: pointer;
+}
