@@ -22,6 +22,14 @@ nav ul {
 nav ul li {
   padding: 0 12px;
 }
+.home:hover{
+  font-weight: bolder;
+  cursor: pointer
+}
+.about:hover{
+  font-weight: bolder;
+  cursor: pointer;
+}
 nav .search{
   display: flex;
   margin-left: 180px;
@@ -32,7 +40,7 @@ nav .searchbar{
   margin-left: 1%;
 }
 .searchicon{
-  margin-left: 150px;
+  margin-left: 160px;
   cursor: pointer;
 }
 .search .searchbar input{
@@ -40,7 +48,7 @@ nav .searchbar{
   width: 200%;
   padding: 4px 0;
   border-radius: 12px;
-  padding-left: 4px;
+  padding-left: 10px;
   border-style: ridge;
   border-width: -1px;
   outline: 0;
@@ -60,22 +68,34 @@ nav .searchbar{
   font-weight: bolder;
   font-size: 1.3rem;
 }
+.brand:hover{
+  cursor: pointer;;
+}
 .cont{
   display: flex;
 }
 .container1 {
-  min-height: 58.7vh;
+  min-height: 61vh;
   background-color: black;
   color: whitesmoke;
   font-family: "Varela Round", sans-serif;
-  display: flex;
-  width: 55%;
-  margin: 23px;
-  margin-left: 15px;
+  overflow: scroll;
+  /* display: flex; */
+  width: 65%;
+  margin: 16.3px;
+  margin-left: 19px;
   padding: 34px;
   border-radius: 12px;
   background-image: url("marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg");
-  background-size: 772px;
+  background-repeat: no-repeat;
+  background-size: 820px;
+}
+.container1 .songList{
+  margin-left: 10px;
+  margin-bottom: 4px;
+}
+.container1::-webkit-scrollbar{
+  display: none;
 }
 .container2{
   color: white;
@@ -109,7 +129,7 @@ nav .searchbar{
   background-blend-mode: transparent;
 }
 .icons {
-  margin-top: 14px;
+  margin-top: 10px;
 }
 .icons svg {
   padding: 0 4px;
@@ -118,4 +138,47 @@ nav .searchbar{
 #myProgressBar {
   width: 60vw;
   cursor: pointer;
+  margin-top: 3px;
+}
+.songcontainer{
+  overflow-y: scroll;
+}
+.songcontainer::-webkit-scrollbar{
+  display: none;
+}
+.songItem{
+  margin-top: 8px;
+  height: 27px;
+  display: flex;
+  background-color: white;
+  color: black;
+  border-radius: 24px;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.65;
+  cursor: pointer;
+}
+.songItem img{
+  width: 25px;
+  margin: 0 13px;
+  border-radius: 34px;
+}
+.timestamp{
+  margin-left: 23px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.timestamp button{
+  border: none;
+  cursor: pointer;
+  border-radius: 19px;
+}
+.btnpl{
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  margin-left: 5px;
 }
