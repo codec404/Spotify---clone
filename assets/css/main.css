@@ -159,6 +159,9 @@ nav .searchbar{
   opacity: 0.65;
   cursor: pointer;
 }
+.songItem:hover{
+  opacity: 0.9;
+}
 .songItem img{
   width: 25px;
   margin: 0 13px;
@@ -179,6 +182,9 @@ nav .searchbar{
 .btnpl{
   display: flex;
   align-items: center;
-  margin-top: 4px;
+  /* margin-top: px; */
   margin-left: 5px;
+}
+.getName{
+  width:100%;
 }
