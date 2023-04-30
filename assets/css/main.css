@@ -1,51 +1,92 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
 body {
   /* background-color:  rgb(26, 24, 24); */
-  background-color: #b49de6;
+  background-color: black;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
+
 nav {
   font-family: "Ubuntu", sans-serif;
 }
+
 nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
-  height: 65 px;
+  height: 46px;
   background-color: black;
-  color: white;
+  color: rgba(255,255,255,0.5);
 }
+
 nav ul li {
-  padding: 0 12px;
+  padding: 0 19px;
 }
-.home:hover{
+
+.home{
   font-weight: bolder;
-  cursor: pointer
+  font-size: 20px;
+  margin-left: 300px;
+  color: #fff;
 }
-.about:hover{
+
+.home:hover {
   font-weight: bolder;
   cursor: pointer;
+  color: #fff;
 }
-nav .search{
+
+.explore{
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.explore:hover {
+  font-weight: bolder;
+  color: #fff;
+  cursor: pointer;
+}
+
+.library{
+  font-size: 20px;
+  font-weight: bolder;
+  margin-right: -160px;
+}
+
+.library:hover {
+  font-weight: bolder;
+  color: #fff;
+  cursor: pointer;
+}
+
+nav .search {
   display: flex;
   margin-left: 180px;
   align-items: center;
   padding: 0;
 }
-nav .searchbar{
+
+nav .searchbar {
   margin-left: 1%;
 }
-.searchicon{
-  margin-left: 160px;
+
+.searchicon {
+  margin-left: 0px;
   cursor: pointer;
 }
-.search .searchbar input{
+
+.search .searchbar input {
   color: white;
-  width: 200%;
+  width: 110%;
   padding: 4px 0;
   border-radius: 12px;
   padding-left: 10px;
@@ -54,28 +95,28 @@ nav .searchbar{
   outline: 0;
   background-color: transparent;
 }
+
 .brand img {
-  width: 42px;
-  padding-top: 2%;
-  padding-bottom: 1%;
-  padding-left: 2px;
-  padding-right: 4px;
-  font-family: "Varela Round", sans-serif;
+  padding: 2px;
 }
+
 .brand {
   display: flex;
   align-items: center;
   font-weight: bolder;
   font-size: 1.3rem;
 }
-.brand:hover{
-  cursor: pointer;;
+
+.brand:hover {
+  cursor: pointer;
 }
-.cont{
+
+.cont {
   display: flex;
 }
+
 .container1 {
-  min-height: 61vh;
+  min-height: 62.5vh;
   background-color: black;
   color: whitesmoke;
   font-family: "Varela Round", sans-serif;
@@ -90,14 +131,17 @@ nav .searchbar{
   background-repeat: no-repeat;
   background-size: 820px;
 }
-.container1 .songList{
+
+.container1 .songList {
   margin-left: 10px;
   margin-bottom: 4px;
 }
-.container1::-webkit-scrollbar{
+
+.container1::-webkit-scrollbar {
   display: none;
 }
-.container2{
+
+.container2 {
   color: white;
   background-color: black;
   width: 440px;
@@ -108,45 +152,85 @@ nav .searchbar{
   padding-top: 11px;
   padding-left: 11px;
   padding-right: 11px;
+
 }
-.container2 .heading{
+
+.container2 .heading {
   padding: 2px 4px;
   border-bottom-style: outset;
   border-width: -2px;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 }
+
 .bottom {
   position: sticky;
-  height: 75px;
+  height: 67px;
   bottom: 0;
   display: flex;
   color: white;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: black;
+  align-items: flex-start;
+  background-color: #212121;
   flex-direction: column;
   background-blend-mode: transparent;
 }
+
 .icons {
   margin-top: 10px;
 }
+
 .icons svg {
   padding: 0 4px;
   cursor: pointer;
 }
-#myProgressBar {
-  width: 60vw;
-  cursor: pointer;
-  margin-top: 3px;
+
+.setProgress{
+  background-color: #212121;
+  width: 100%;
+  height: 12px;
+  display: flex;
+  align-items: center;
 }
-.songcontainer{
+
+.setProgress:hover{
+  cursor:pointer
+}
+
+#myProgressBar {
+  height: 2.5px;
+  width: 99%;
+  cursor: pointer;
+  margin-top: -15px;
+  background: crimson;
+}
+#myProgressBar:hover{
+  height: 4px;
+}
+#myProgressBar {
+  color: lightblue;
+}
+
+#myProgressBar::-moz-progress-bar {
+  background: lightblue;
+}
+
+#myProgressBar::-webkit-progress-value {
+  background: red;
+}
+
+
+.songcontainer {
+  height: 319px;
   overflow-y: scroll;
 }
-.songcontainer::-webkit-scrollbar{
+
+.songcontainer::-webkit-scrollbar {
   display: none;
 }
-.songItem{
+
+.songItem {
   margin-top: 8px;
   height: 27px;
   display: flex;
@@ -159,32 +243,76 @@ nav .searchbar{
   opacity: 0.65;
   cursor: pointer;
 }
-.songItem:hover{
+
+.songItem:hover {
   opacity: 0.9;
 }
-.songItem img{
+
+.songItem img {
   width: 25px;
   margin: 0 13px;
   border-radius: 34px;
 }
-.timestamp{
+
+.timestamp {
   margin-left: 23px;
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.timestamp button{
+
+.timestamp button {
   border: none;
   cursor: pointer;
   border-radius: 19px;
 }
-.btnpl{
+
+.btnpl {
   display: flex;
   align-items: center;
   /* margin-top: px; */
   margin-left: 5px;
 }
-.getName{
-  width:100%;
+
+.getName {
+  width: 100%;
+}
+
+#banner{
+  background-color: #b49de6;
+  margin: 0 90px;
+  margin-top: 22px;
+  height: 210px;
+  width: 210px;
+}
+#banner img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.getTime{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+#timer{
+  margin-top: 2px;
+  margin-right: 5px;
+}
+#maxTime{
+  margin-top: 2px;
+  margin-left: 5px;
+}
+.controls{
+  display: flex;
+}
+.actionBar{
+  display: flex;
+  margin-bottom: 15px;
+  margin-top: -8px;
+  flex-direction: row;
+  margin-left: 9px;
 }
