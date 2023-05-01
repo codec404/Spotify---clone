@@ -127,9 +127,6 @@ nav .searchbar {
   margin-left: 19px;
   padding: 34px;
   border-radius: 12px;
-  background-image: url("marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg");
-  background-repeat: no-repeat;
-  background-size: 820px;
 }
 
 .container1 .songList {
@@ -182,7 +179,6 @@ nav .searchbar {
 }
 
 .icons svg {
-  padding: 0 4px;
   cursor: pointer;
 }
 
@@ -204,22 +200,12 @@ nav .searchbar {
   cursor: pointer;
   margin-top: -15px;
   background: crimson;
+  accent-color: red;
 }
+
 #myProgressBar:hover{
   height: 4px;
 }
-#myProgressBar {
-  color: lightblue;
-}
-
-#myProgressBar::-moz-progress-bar {
-  background: lightblue;
-}
-
-#myProgressBar::-webkit-progress-value {
-  background: red;
-}
-
 
 .songcontainer {
   height: 319px;
@@ -230,28 +216,86 @@ nav .searchbar {
   display: none;
 }
 
+.songName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 215px;
+  height: 280px
+}
+
+.Name{
+  margin-top: 2px;
+}
+
 .songItem {
   margin-top: 8px;
-  height: 27px;
+  height: 201px;
+  width: 201px;
   display: flex;
-  background-color: white;
+  background-color: #b49de6;
+  background-image: url(covers/1.jpg);
+  background-size: 201px;
   color: black;
-  border-radius: 24px;
-  width: 40%;
   justify-content: space-between;
   align-items: center;
-  opacity: 0.65;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-.songItem:hover {
-  opacity: 0.9;
+.songItem:hover{
+  opacity: 0.75;
 }
 
-.songItem img {
-  width: 25px;
-  margin: 0 13px;
-  border-radius: 34px;
+.songItemPlay{
+  color: white;
+  font-size: 150px;
+  margin: auto;
+}
+
+a:link{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.row2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.row3{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .timestamp {
@@ -271,8 +315,14 @@ nav .searchbar {
 .btnpl {
   display: flex;
   align-items: center;
-  /* margin-top: px; */
-  margin-left: 5px;
+  margin: auto;
+  border-radius: 50%;
+  border-color: transparent;
+  background: transparent;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  position: relative;
 }
 
 .getName {
@@ -311,8 +361,12 @@ nav .searchbar {
 }
 .actionBar{
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 4px;
   margin-top: -8px;
   flex-direction: row;
   margin-left: 9px;
+}
+
+.slash{
+  margin-top: 4px;
 }

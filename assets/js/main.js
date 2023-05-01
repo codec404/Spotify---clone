@@ -1,58 +1,67 @@
 console.log("Welcome");
 
 //Initialize Variables
-let songIndex = 0;
+let songIndex = -1; //get the index of each song
 let audioElement = new Audio("assets/js/songs/1.mp3");
-let masterPlay = document.getElementById("masterPlay");
+let masterPlay = document.getElementById("masterPlay"); // Play button access
 let miniplay = document.getElementById("miniplay");
-let myProgressBar = document.getElementById("myProgressBar");
+let myProgressBar = document.getElementById("myProgressBar"); // ProgressBar
 let songItems = Array.from(document.getElementsByClassName("songItem"));
 let banner = document.getElementById('banImg');
 let timer = document.getElementById('timer');
 let songs = [
     {
-        songName: "Levitating Dua Lipa",
+        songName: "Levitating",
         filepath: "assets/js/songs/1.mp3",
+        artist:"Dua Lipa",
         coverPath: "assets/css/covers/1.jpg",
     },
     {
-        songName: "Boro-Eka-Lage Manna Dey",
+        songName: "Boro-Eka-Lage",
         filepath: "assets/js/songs/2.mp3",
+        artist:"Manna Dey",
         coverPath: "assets/css/covers/2.jpg",
     },
     {
-        songName: "O Amar Mon Jamunar Onge Onge",
+        songName: "O Amar Mon Jamunar",
         filepath: "assets/js/songs/3.mp3",
+        artist:"Manna Dey",
         coverPath: "assets/css/covers/3.jpeg",
     },
     {
         songName: "Kotobaro Bhebechhinu",
         filepath: "assets/js/songs/4.mp3",
+        artist:"Babul Supriyo",
         coverPath: "assets/css/covers/4.jpeg",
     },
     {
-        songName: "Lalita Go",
+        songName: "Lalita",
         filepath: "assets/js/songs/5.mp3",
+        artist: "Manna Dey",
         coverPath: "assets/css/covers/3.jpeg",
     },
     {
-        songName: "Pal Pal Dil Ke Pas Blackmail",
+        songName: "Pal Pal Dil Ke Pas",
         filepath: "assets/js/songs/6.mp3",
+        artist:"Kishore Kumar",
         coverPath: "assets/css/covers/5.jpg",
     },
     {
         songName: "Rangini Koto Mor",
         filepath: "assets/js/songs/7.mp3",
+        artist:"Manna Dey",
         coverPath: "assets/css/covers/3.jpeg",
     },
     {
         songName: "Agar tum saath ho",
         filepath: "assets/js/songs/8.mp3",
+        artist:"Arijit Singh",
         coverPath: "assets/css/covers/6.jpg",
     },
     {
-        songName: "Aye Dil Hai Mushkil Arijit Singh",
+        songName: "Aye Dil Hai Mushkil-(Title Track)",
         filepath: "assets/js/songs/9.mp3",
+        artist:"Arijit Singh",
         coverPath: "assets/css/covers/7.jpg",
     },
 ];
@@ -76,25 +85,20 @@ for (let i = 0; i < len.length - 1; i++) {
         break;
     }
 }
+//Not Required(Stored for later use)
 let avgSpeed = maxSpeed + minSpeed;
 avgSpeed >>= 1;
 let getSpeed = 2;
-// console.log(avgSpeed);
-songItems.forEach((element, i) => {
-    console.log(element, i);
-    element.getElementsByTagName("img")[0].src = songs[i].coverPath;
-    let l = songs[i].songName.length;
-    if (l > 19) {
-        element.getElementsByClassName("getName")[0].innerHTML =
-            `<marquee scrollamount = ` +
-            getSpeed +
-            `behavior = "scroll">` +
-            songs[i].songName +
-            `</marquee>`;
-    } else {
-        element.getElementsByClassName("getName")[0].innerText = songs[i].songName;
-    }
-});
+
+for(let i=0;i<songs.length;i++)
+{
+    // console.log(songs[i].coverPath);
+    newUrl = `${songs[i].coverPath}`;
+    newName = `${songs[i].songName}`;
+    document.getElementById(`song${i+1}`).setAttribute("style",`background-image:url(${newUrl})`);
+    document.getElementById(`n${i}`).innerText = newName;
+    document.getElementById(`a${i}`).innerText = songs[i].artist;
+}
 
 //Handle play/pause click
 let songId = 0;
@@ -111,48 +115,41 @@ const forward = () => {
     audioElement.play();
     masterPlay.classList.remove("bi-play-circle");
     masterPlay.classList.add("bi-pause-circle");
-    masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-    miniplay.classList.remove("bi-play-circle");
-    miniplay.classList.add("bi-pause-circle");
-    miniplay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+    masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path fill="white" d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+    miniplay.classList.remove("fa-play");
+    miniplay.classList.add("fa-pause");
 };
+
+//Function to make the other play buttons play when one is pause
 const makeAllPlays = () => {
     Array.from(document.getElementsByClassName("songItemPlay")).forEach(
         (element) => {
-            element.classList.remove("bi-pause-circle");
-            element.classList.add("bi-play-circle");
-            element.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-            d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
+            element.classList.remove("fa-pause");
+            element.classList.add("fa-play");
         }
-    );
-};
+        );
+    };
+
 const play_pause = ()=>{
     miniplay = document.getElementById(`${songId}`);
     if (audioElement.paused || audioElement.currentTime <= 0) {
         audioElement.play();
         masterPlay.classList.remove("bi-play-circle");
         masterPlay.classList.add("bi-pause-circle");
-        masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-        miniplay.classList.remove("bi-play-circle");
-        miniplay.classList.add("bi-pause-circle");
-        miniplay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+        masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fill="white" d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+        miniplay.classList.remove("fa-play");
+        miniplay.classList.add("fa-pause");
     } else {
         audioElement.pause();
         masterPlay.classList.remove("bi-pause-circle");
         masterPlay.classList.add("bi-play-circle");
-        masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
+        masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path fill="white"
             d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
-        miniplay.classList.remove("bi-pause-circle");
-        miniplay.classList.add("bi-play-circle");
-        miniplay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-            <path
-                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
+        miniplay.classList.remove("fa-pause");
+        miniplay.classList.add("fa-play");
     }
 }
 //Setting the banner
@@ -162,28 +159,29 @@ const setBanner = ()=>{
 }
 setBanner();
 
+let getMaxTime = document.getElementById("maxTime")
+
 let update = setInterval(function() {
-    let mins = Math.floor(audioElement.currentTime / 60);
-    let secs = Math.floor(audioElement.currentTime % 60);
-    if (secs < 10) {
-      secs = '0' + String(secs);
+    // To prevent displaying NaN
+    if (!isNaN(audioElement.duration)) { 
+        //Changing the current time
+        let mins = Math.floor(audioElement.currentTime / 60);
+        let secs = Math.floor(audioElement.currentTime % 60);
+        if (secs < 10) {
+        secs = '0' + String(secs);
+        }
+        timer.innerHTML = mins + ':' + secs;
+        //Getting the Max Duration of the song  
+        let maxmins = Math.floor(audioElement.duration / 60);
+        let maxsecs = Math.floor(audioElement.duration % 60);
+        if(maxsecs < 10){
+            maxsecs = '0' + String(maxsecs);
+        }
+        getMaxTime.innerHTML = maxmins + ':' + maxsecs;
     }
-    timer.innerHTML = mins + ':' + secs;
   }, 10);
 
-let getMaxDuration = document.getElementById("maxTime");
-
-let maxTime = ()=>{
-    let mins = Math.floor(audioElement.duration / 60);
-    let secs = Math.floor(audioElement.duration % 60);
-    if (secs < 10) {
-      secs = '0' + String(secs);
-    }
-    getMaxDuration.innerHTML = mins + ':' + secs;
-  };//To be changed
-
 masterPlay.addEventListener("click", () => {
-    maxTime();
     play_pause();
 });
 
@@ -203,7 +201,6 @@ document.getElementById("next").addEventListener("click", () => {
         songId++;
     }
     setBanner();
-    maxTime();
     miniplay = document.getElementById(`${songId}`);
     makeAllPlays();
     audioElement.src = `assets/js/songs/${songId + 1}.mp3`;
@@ -211,12 +208,12 @@ document.getElementById("next").addEventListener("click", () => {
     audioElement.play();
     masterPlay.classList.remove("bi-play-circle");
     masterPlay.classList.add("bi-pause-circle");
-    masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-    miniplay.classList.remove("bi-play-circle");
-    miniplay.classList.add("bi-pause-circle");
-    miniplay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+    masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path fill="white" d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+    miniplay.classList.remove("fa-play");
+    miniplay.classList.add("fa-pause");
+    miniplay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path fill="white" d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
 });
 document.getElementById("previous").addEventListener("click", () => {
     if (songId <= 0) {
@@ -225,7 +222,6 @@ document.getElementById("previous").addEventListener("click", () => {
         songId -= 1;
     }
     setBanner();
-    maxTime();
     miniplay = document.getElementById(`${songId}`);
     makeAllPlays();
     audioElement.src = `assets/js/songs/${songId + 1}.mp3`;
@@ -233,12 +229,8 @@ document.getElementById("previous").addEventListener("click", () => {
     audioElement.play();
     masterPlay.classList.remove("bi-play-circle");
     masterPlay.classList.add("bi-pause-circle");
-    masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-    miniplay.classList.remove("bi-play-circle");
-    miniplay.classList.add("bi-pause-circle");
-    miniplay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+    miniplay.classList.remove("fa-play");
+    miniplay.classList.add("fa-pause");
 });
 //Listen to Events
 audioElement.addEventListener("timeupdate", () => {
@@ -253,63 +245,53 @@ audioElement.addEventListener("timeupdate", () => {
 
 myProgressBar.addEventListener("change", () => {
     audioElement.currentTime =
-        (myProgressBar.value * audioElement.duration) / 100;
+    (myProgressBar.value * audioElement.duration) / 100;
 });
 
 myProgressBar.addEventListener("click",function(e){
-        let x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
-        y = e.pageY - this.offsetTop,  // or e.offsetY
-        clickedValue = x * this.max / this.offsetWidth;
+    let x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
+    y = e.pageY - this.offsetTop,  // or e.offsetY
+    clickedValue = x * this.max / this.offsetWidth;
         audioElement.currentTime =
             (clickedValue * audioElement.duration) / 100;
-})
+});
 
-Array.from(document.getElementsByClassName("songItemPlay")).forEach(
-    (element) => {
-        element.addEventListener("click", (e) => {
-            // console.log(e.target);
-            maxTime();
-            makeAllPlays();
-            idx = parseInt(e.target.id);
-            if (songId != idx) {
-                e.target.classList.remove("bi-play-circle");
-                e.target.classList.add("bi-pause-circle");
-                e.target.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-                audioElement.src = `assets/js/songs/${idx + 1}.mp3`;
-                audioElement.currentTime = 0;
+Array.from(document.getElementsByClassName("songItemPlay")).forEach((element) => {
+    element.addEventListener("click",(e)=>{
+        idx = parseInt(e.target.id);
+        makeAllPlays();
+        console.log(idx);
+        if (songId != idx) {
+            e.target.classList.remove("fa-play");
+            e.target.classList.add("fa-pause");
+            audioElement.src = `assets/js/songs/${idx + 1}.mp3`;
+            audioElement.currentTime = 0;
+            audioElement.play();
+            masterPlay.classList.remove("bi-play-circle");
+            masterPlay.classList.add("bi-pause-circle");
+            masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
+            songId = idx;
+            setBanner();
+        } else {
+            if (!audioElement.paused) {
+                e.target.classList.remove("fa-pause");
+                e.target.classList.add("fa-play");
+                audioElement.pause();
+                masterPlay.classList.remove("bi-pause-circle");
+                masterPlay.classList.add("bi-play-circle");
+                masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path fill="white"
+                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
+            } else {
+                e.target.classList.remove("fa-play");
+                e.target.classList.add("fa-pause");
                 audioElement.play();
                 masterPlay.classList.remove("bi-play-circle");
                 masterPlay.classList.add("bi-pause-circle");
-                masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                masterPlay.innerHTML = `<path fill="transparent" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-                songId = idx;
-                setBanner();
-            } else {
-                if (!audioElement.paused) {
-                    e.target.classList.remove("bi-pause-circle");
-                    e.target.classList.add("bi-play-circle");
-                    e.target.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path
-                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
-                    audioElement.pause();
-                    masterPlay.classList.remove("bi-pause-circle");
-                    masterPlay.classList.add("bi-play-circle");
-                    masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path
-                    d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />`;
-                } else {
-                    e.target.classList.remove("bi-play-circle");
-                    e.target.classList.add("bi-pause-circle");
-                    e.target.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-                    audioElement.play();
-                    masterPlay.classList.remove("bi-play-circle");
-                    masterPlay.classList.add("bi-pause-circle");
-                    masterPlay.innerHTML = `<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>`;
-                }
             }
-        });
-    }
-);
+        }
+    });
+});
