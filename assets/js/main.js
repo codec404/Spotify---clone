@@ -1,5 +1,6 @@
 console.log("Welcome");
 
+
 //Initialize Variables
 let songIndex = -1; //get the index of each song
 let audioElement = new Audio("assets/js/songs/1.mp3");
@@ -12,6 +13,8 @@ let fndName = document.getElementById('bName');
 let newArtist = document.getElementById('bArtist');
 let timer = document.getElementById('timer');
 let volume_slider = document.getElementById("volume");
+let getHolder = document.getElementById("holder");
+let download = document.getElementById("dwnld");
 let songs = [
     {
         songName: "Levitating",
@@ -94,9 +97,36 @@ let songs = [
         liked : false,
         disliked : false
     },
+    {
+        songName: "Manush Manusher Jonno",
+        filepath: "assets/js/songs/10.mp3",
+        artist:"Bhupen Hazarika",
+        coverPath: "assets/css/covers/8.jpg",
+        lyrics: "assets/js/lyrics/10.txt",
+        liked : false,
+        disliked : false
+    },
+    {
+        songName: "Bhalobeshe Shokhi",
+        filepath: "assets/js/songs/11.mp3",
+        artist:"Shaan",
+        coverPath: "assets/css/covers/9.jpg",
+        lyrics: "assets/js/lyrics/11.txt",
+        liked : false,
+        disliked : false
+    },
+    {
+        songName: "Tumi Ekjoni Shudhu",
+        filepath: "assets/js/songs/12.mp3",
+        artist:"Manna Dey",
+        coverPath: "assets/css/covers/10.jpeg",
+        lyrics: "assets/js/lyrics/12.txt",
+        liked : false,
+        disliked : false
+    },
 ];
 
-
+let lyr = 0, upn = 1;
 var len = new Array();
 for (let i = 0; i < songs.length; i++) {
     len.push(songs[i].songName.length);
@@ -138,6 +168,53 @@ function fetchDuration(path) {
     })
 }
 
+
+const displayLyrics = ()=>{
+    fetch(`assets/js/lyrics/${songId+1}.txt`)
+    .then(function(response){
+        return response.text();
+    })
+    .then(function(data){
+        getHolder.innerHTML = `<textarea style="color: white; background-color: black;width: 398px; height: 100%;font-family: 'Nunito', sans-serif; ;border:none;padding-top: 30px;">${data}</textarea>`
+    })
+};
+
+const turnUpNextOn = ()=>{
+    lyr = 0; upn = 1;
+    borderUpNext.setAttribute("style","border-bottom: 1px solid white;");
+    borderLyrics.setAttribute("style","border-bottom: 1.5px solid rgb(18, 18, 18);");
+    displayUpNext();
+    let picPlay = document.getElementById(`spi${songId}`);
+    let gif = document.getElementById(`g${songId}`);
+    startPlaying(songId);
+    if(!audioElement.paused)
+    {
+        picPlay.classList.remove("fa-play");
+        picPlay.classList.add("fa-volume-up");
+        gif.style.opacity = 1;
+    }
+    else{
+        picPlay.classList.remove("fa-volume-up");
+        picPlay.classList.add("fa-play");
+        gif.style.opacity = 0;
+    }
+    for(let i = 0;i<songs.length;i++){
+        let trackDur = document.getElementById(`td${i}`);
+
+        //Fetching the PromiseResult Value using await
+        const getDur = async()=>
+        {
+            const a = await fetchDuration(songs[i].filepath);
+            let maxmins = Math.floor(a / 60);
+            let maxsecs = Math.floor(a % 60);
+            if(maxsecs < 10){
+                maxsecs = '0' + String(maxsecs);
+            }
+            trackDur.innerText = maxmins + ':' + maxsecs;
+        }
+        getDur();
+    }
+}
 
 for(let i=0;i<songs.length;i++)
 {
@@ -186,13 +263,32 @@ const makePlays = ()=>{
 };
 //Handle play/pause click
 
-const startPlaying = (getIndex) =>{
-    
+const makeAllGif = () =>{
+    Array.from(document.getElementsByClassName("gifImg")).forEach(
+        (element) => {
+            element.style.opacity = 0;
+        }
+    );
+}
+
+const makeAllDark = () => {
+    Array.from(document.getElementsByClassName("darken")).forEach(
+        (element) => {
+            element.setAttribute("style","backdrop-filter: brightness(100%)");
+        }
+    );
 };
 
 let songId = 0;
+let songLength = songs.length;
+
+const startPlaying = (e) =>{
+    let startPlay = document.getElementById(`dp${e}`);
+    startPlay.setAttribute("style","backdrop-filter: brightness(20%);");
+};
+
 const forward = () => {
-    if (songId >= 8) {
+    if (songId >= songLength-1) {
         songId = 0;
     } else {
         songId++;
@@ -200,6 +296,8 @@ const forward = () => {
     miniplay = document.getElementById(`${songId}`);
     makeAllPlays();
     makePlays();
+    makeAllGif();
+    startPlaying(songId);
     audioElement.src = `assets/js/songs/${songId + 1}.mp3`;
     audioElement.currentTime = 0;
     audioElement.play();
@@ -260,22 +358,29 @@ const turnDisLikeOn = () =>{
 const play_pause = ()=>{
     miniplay = document.getElementById(`${songId}`);
     picplay = document.getElementById(`spi${songId}`);
+    let gif = document.getElementById(`g${songId}`);
     if (audioElement.paused || audioElement.currentTime <= 0) {
         audioElement.play();
         masterPlay.classList.remove("fa-play");
         masterPlay.classList.add("fa-pause");
         miniplay.classList.remove("fa-play");
         miniplay.classList.add("fa-pause");
-        picplay.classList.remove("fa-play");
-        picplay.classList.add("fa-volume-up");
+        if(upn){
+            picplay.classList.remove("fa-play");
+            picplay.classList.add("fa-volume-up");
+        }
+        gif.style.opacity = 1;
     } else {
         audioElement.pause();
         masterPlay.classList.remove("fa-pause");
         masterPlay.classList.add("fa-play");
         miniplay.classList.remove("fa-pause");
         miniplay.classList.add("fa-play");
-        picplay.classList.remove("fa-volume-up");
-        picplay.classList.add("fa-play");
+        if(upn){
+            picplay.classList.remove("fa-volume-up");
+            picplay.classList.add("fa-play");
+        }
+        gif.style.opacity = 0;
     }
 }
 //Setting the banner
@@ -341,7 +446,10 @@ const getVolume = () =>{
 document.body.onkeydown = function(e) {
     if (e.key == " " ||
         e.code == "Space" ||      
-        e.keyCode == 32      
+        e.keyCode == 32 ||
+        e.keyCode == 179 ||
+        e.code == "MediaPlayPause" ||
+        e.key == "MediaPlayPause"     
     ) {
       play_pause();
     }
@@ -361,7 +469,7 @@ document.body.onkeyup = function(e) {
 }
 
 document.getElementById("next").addEventListener("click", () => {
-    if (songId >= 8) {
+    if (songId >= songLength-1) {
         songId = 0;
     } else {
         songId++;
@@ -369,11 +477,16 @@ document.getElementById("next").addEventListener("click", () => {
     setBanner();
     setName();
     setArtist();
+    let gif = document.getElementById(`g${songId}`);
     miniplay = document.getElementById(`${songId}`);
     picplay = document.getElementById(`spi${songId}`);
     makeAllPlays();
     makeAllWhites();
+    makeAllGif();
     makePlays();
+    makeAllDark();
+    startPlaying(songId);
+    download.setAttribute("href",`${songs[songId].filepath}`);
     if(songs[songId].liked)
     {
         turnLikeOn();
@@ -388,23 +501,35 @@ document.getElementById("next").addEventListener("click", () => {
     masterPlay.classList.add("fa-pause");
     miniplay.classList.remove("fa-play");
     miniplay.classList.add("fa-pause");
-    picplay.classList.remove("fa-play");
-    picplay.classList.add("fa-volume-up");
+    if(upn){
+        picplay.classList.remove("fa-play");
+        picplay.classList.add("fa-volume-up");
+    }
+    else if(lyr)
+    {
+        turnUpNextOn();
+    }
+    gif.style.opacity = 1;
 });
 document.getElementById("previous").addEventListener("click", () => {
     if (songId <= 0) {
-        songId = 8;
+        songId = songLength-1;
     } else {
         songId -= 1;
     }
     setBanner();
     setName();
     setArtist();
+    let gif = document.getElementById(`g${songId}`);
     miniplay = document.getElementById(`${songId}`);
     picplay = document.getElementById(`spi${songId}`);
     makeAllPlays();
     makeAllWhites();
+    makeAllGif();
     makePlays();
+    makeAllDark();
+    startPlaying(songId);
+    download.setAttribute("href",`${songs[songId].filepath}`);
     if(songs[songId].liked)
     {
         turnLikeOn();
@@ -419,8 +544,15 @@ document.getElementById("previous").addEventListener("click", () => {
     masterPlay.classList.add("fa-pause");
     miniplay.classList.remove("fa-play");
     miniplay.classList.add("fa-pause");
-    picplay.classList.remove("fa-play");
-    picplay.classList.add("fa-volume-up");
+    if(upn){
+        picplay.classList.remove("fa-play");
+        picplay.classList.add("fa-volume-up");
+    }
+    else if(lyr)
+    {
+        turnUpNextOn();
+    }
+    gif.style.opacity = 1;
 });
 //Listen to Events
 audioElement.addEventListener("timeupdate", () => {
@@ -468,12 +600,16 @@ ProgressBar.addEventListener("mouseleave",()=>{
     myProgressBar.setAttribute("style","height:1.5px");
 });
 
+//On clicking the play button on the song poster
 Array.from(document.getElementsByClassName("songItemPlay")).forEach((element) => {
     element.addEventListener("click",(e)=>{
         idx = parseInt(e.target.id);
         makeAllPlays();
         makeAllWhites();
+        makeAllGif();
         makePlays();
+        makeAllDark();
+        startPlaying(idx);
         if(songs[songId].liked)
         {
             turnLikeOn();
@@ -482,6 +618,7 @@ Array.from(document.getElementsByClassName("songItemPlay")).forEach((element) =>
             turnDisLikeOn();
         }
         console.log(idx);
+        download.setAttribute("href",`${songs[idx].filepath}`);
         let picPlay = document.getElementById(`spi${idx}`);
         // console.log(picPlay.id);
         if (songId != idx) {
@@ -492,27 +629,45 @@ Array.from(document.getElementsByClassName("songItemPlay")).forEach((element) =>
             audioElement.play();
             masterPlay.classList.remove("fa-play");
             masterPlay.classList.add("fa-pause");
-            picPlay.classList.remove("fa-play");
-            picPlay.classList.add("fa-volume-up");
+            if(upn){
+                picPlay.classList.remove("fa-play");
+                picPlay.classList.add("fa-volume-up");
+            }
+            else if(lyr)
+            {
+                turnUpNextOn();
+            }
             songId = idx;
+            let gif = document.getElementById(`g${songId}`);
             setBanner();
             setName();
             setArtist();
+            gif.style.opacity = 1;
         } else {
             if (!audioElement.paused) {
+                let gif = document.getElementById(`g${songId}`);
                 e.target.classList.remove("fa-pause");
                 e.target.classList.add("fa-play");
                 audioElement.pause();
                 masterPlay.classList.remove("fa-pause");
                 masterPlay.classList.add("fa-play");
-                picPlay.classList.remove("fa-volume-up");
-                picPlay.classList.add("fa-play");
+                if(upn){
+                    picPlay.classList.remove("fa-volume-up");
+                    picPlay.classList.add("fa-play");
+                }
+                gif.style.opacity = 0;
             } else {
+                let gif = document.getElementById(`g${songId}`);
                 e.target.classList.remove("fa-play");
                 e.target.classList.add("fa-pause");
                 audioElement.play();
-                picPlay.classList.remove("fa-play");
-                picPlay.classList.add("fa-volume-up");
+                masterPlay.classList.remove("fa-play");
+                masterPlay.classList.add("fa-pause");
+                if(upn){
+                    picPlay.classList.remove("fa-play");
+                    picPlay.classList.add("fa-volume-up");
+                }
+                gif.style.opacity = 1;
             }
         }
     });
@@ -524,6 +679,7 @@ signIn.addEventListener("click",(e)=>{
     console.log(e);
 });
 
+//Controlling the volume
 function setVolume(){
     audioElement.volume = volume_slider.value/100;
     console.log(audioElement.volume);
@@ -563,3 +719,21 @@ control.addEventListener("mouseleave",()=>{
     volume_slider.setAttribute("style","visibility: hidden;");
 });
 
+
+let borderLyrics = document.getElementById("bl");
+let borderUpNext = document.getElementById("bup");
+let holderHtml = getHolder.innerHTML;
+const displayUpNext = () =>{
+    getHolder.innerHTML = holderHtml;
+};
+
+borderLyrics.addEventListener("click",()=>{
+    lyr = 1; upn = 0;
+    borderLyrics.setAttribute("style","border-bottom: 1px solid white;");
+    borderUpNext.setAttribute("style","border-bottom: 1.5px solid rgb(18, 18, 18);");
+    displayLyrics();
+});
+
+borderUpNext.addEventListener("click",()=>{
+    turnUpNextOn();
+});

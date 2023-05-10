@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
 
 body {
   /* background-color:  rgb(26, 24, 24); */
@@ -236,6 +237,7 @@ nav .searchbar {
   align-items: flex-start;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  padding-bottom: 1px;
 }
 
 .borderUpNext{
@@ -258,7 +260,7 @@ nav .searchbar {
   margin-left: 0px;
   width: 50%;
   height: 100%;
-  border-bottom: 2px solid rgb(18, 18, 18);
+  border-bottom: 1.5px solid rgb(18, 18, 18);
   border-radius: 2px;
   display: flex;
   justify-content: center;
@@ -272,6 +274,7 @@ nav .searchbar {
 
 .holder{
   height: 380px;
+  width: 398px;
   overflow: hidden;
 }
 
@@ -316,7 +319,7 @@ nav .searchbar {
 .getSongs{
   overflow: scroll;
   margin-top: 30px;
-  cursor: pointer;
+  cursor: all-scroll;
 }
 
 .getSongs::-webkit-scrollbar {
@@ -330,6 +333,7 @@ nav .searchbar {
   border-bottom: 0.5px solid rgb(44, 42, 42);
   display: flex;
   align-items: center;
+  /* position: absolute; */
 }
 
 .playing .pic{
@@ -340,22 +344,44 @@ nav .searchbar {
   margin-right: 10px;
   margin-left: 2px;
   border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.darken{
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: black; */
 }
 
 .picIcon{
-  height: 100%;
-  width: 100%;
+  height: 50%;
+  width: 50%;
   z-index: 3;
+  background-color: transparent;
+  padding-left: 2px;
+  border-radius: 70%;
   display: flex;
   align-items: center;
-  margin-left: 30%;
+  justify-content: center;
+  /* margin-left: 2px; */
   filter: brightness(2);
+  cursor: pointer;
+}
+
+.playing:hover .darken{
+  backdrop-filter: brightness(20%);
 }
 
 .playing .trackdetail{
   background-color: black;
   height: 35px;
-  width: 298px;
+  width: 235px;
   margin-right: 10px;
   margin-left: 2px;
   font-size: 14px;
@@ -597,25 +623,12 @@ a:active {
   text-decoration: underline;
 }
 
-.row1 {
+.row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-}
-.row2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-.row3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .timestamp {
@@ -770,3 +783,28 @@ a:active {
   margin-left: 30px;
   cursor: pointer;
 }
+
+.gif{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -16px;
+  margin-right: 15px;
+  /* margin-left: 200px; */
+}
+
+.gifImg{
+  height: 15px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+/* footer{
+  background-color: #676767;
+  color: #F0F0F0;
+  padding: 4px 1px;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #949393;
+  margin-top: 10px;
+} */
